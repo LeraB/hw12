@@ -4,4 +4,15 @@
   margin:4px;
   border:1px solid black;
   float: left;
+  position: relative;
+  overflow: hidden;
+}
+.draggable {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  background-color: lightsteelblue;
+  position: absolute;
+  z-index: -1;
+  left: 0;
 }
