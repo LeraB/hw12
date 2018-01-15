@@ -1,18 +1,23 @@
 .slider-container {
-  width:48%;
+  width:600px;
   height:200px;
   margin:4px;
-  border:1px solid black;
+  border:3px solid #20a79c;
   float: left;
   position: relative;
   overflow: hidden;
+  user-select: none;
 }
+
 .draggable {
-  display: inline-block;
   height: 100%;
-  width: 100%;
-  background-color: lightsteelblue;
+  width: 1000%;
   position: absolute;
   z-index: -1;
-  left: 0;
+}
+
+img {
+  margin: -1px;
+  width:600px;
+  height: 100%;
 }
