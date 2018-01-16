@@ -122,11 +122,12 @@ function onMouseUp(event) {
                 let elem = event.target.children[0].children[0].cloneNode()
                 event.target.children[0].appendChild(elem)
                 event.target.children[0].removeChild(event.target.children[0].children[0])
-                animateSlider(event.target.children[0], offset[id], true)
+                animateSlider(event.target.children[0], offset[id], true, parseInt(event.target.children[0].style.left) - offset[id])
             } else {
                 animateSlider(event.target.children[0], offset[id] - 600, true)
                 offset[id] -= 600
             }
+
         } else if (mouseDown < clientX - (domRect.left + event.target.clientLeft)){
             animateSlider(event.target.children[0], offset[id] + 600)
             offset[id] += 600
@@ -134,16 +135,21 @@ function onMouseUp(event) {
     }
     mouseDown = false
 }
-function animateSlider(elem, destPos, left = false) {
-    let currentPos = parseInt(elem.style.left)
-    let id = setInterval(() => {
+function animateSlider(elem, destPos, left = false, currentPos) {
+    let id = setInterval(frame, 1)
+    currentPos = currentPos ? currentPos : parseInt(elem.style.left)
+    function frame() {
         if (currentPos === destPos) {
             clearInterval(id)
         } else {
-            left ? currentPos-- : currentPos++
+            if (Math.abs(currentPos) >= 550 || Math.abs(currentPos) <= 50) {
+                left ? currentPos-- : currentPos++
+            } else {
+                left ? currentPos -= 10 : currentPos += 10
+            }
             elem.style.left = currentPos + 'px'
         }
-    }, 1)
+    }
 }
 
 
