@@ -1,11 +1,7 @@
-let offset = {
-    offset1: 0,
-    offset2: 0,
-    offset3: 0,
-    offset4: 0
-};
+let offset = {}
 let mouseDown = false
 Array.prototype.forEach.call(document.getElementsByClassName('slider-container'), value => {
+    offset[value.children[0].id] = 0
     value.addEventListener('mousedown', event => onMouseDown(event))
     value.addEventListener('touchstart', event => onMouseDown(event))
     value.addEventListener('mouseup', event => onMouseUp(event))
@@ -25,7 +21,7 @@ function onMouseMove(event) {
         let domRect = event.target.getBoundingClientRect()
         let clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX
         let leftSide = clientX - (domRect.left + event.target.clientLeft)
-        if (mouseDown < clientX - (domRect.left + event.target.clientLeft) && parseInt(event.target.children[0].style.left) === 0){
+        if (mouseDown < clientX - (domRect.left + event.target.clientLeft) && parseInt(event.target.children[0].style.left) >= 0){
             let elem = event.target.children[0].children[event.target.children[0].children.length - 1].cloneNode()
             event.target.children[0].prepend(elem)
             event.target.children[0].removeChild(event.target.children[0].children[event.target.children[0].children.length - 1])
