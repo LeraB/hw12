@@ -40,15 +40,27 @@ function onMouseUp(event) {
                 let elem = event.target.children[0].children[0].cloneNode()
                 event.target.children[0].appendChild(elem)
                 event.target.children[0].removeChild(event.target.children[0].children[0])
-                event.target.children[0].style.left = offset[id] + 'px'
+                animateSlider(event.target.children[0], offset[id], true)
             } else {
-                event.target.children[0].style.left = offset[id] - 600 + 'px'
+                animateSlider(event.target.children[0], offset[id] - 600, true)
                 offset[id] -= 600
             }
         } else if (mouseDown < clientX - (domRect.left + event.target.clientLeft)){
-            event.target.children[0].style.left = offset[id] + 600 + 'px'
+            animateSlider(event.target.children[0], offset[id] + 600)
             offset[id] += 600
         }
     }
     mouseDown = false
+}
+function animateSlider(elem, destPos, left = false) {
+    let id = setInterval(frame, 1)
+    let currentPos = parseInt(elem.style.left)
+    function frame() {
+        if (currentPos === destPos) {
+            clearInterval(id)
+        } else {
+            left ? currentPos-- : currentPos++
+            elem.style.left = currentPos + 'px'
+        }
+    }
 }
