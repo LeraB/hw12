@@ -4,9 +4,7 @@ let offset = {
     offset3: 0,
     offset4: 0
 };
-
 let mouseDown = false
-
 Array.prototype.forEach.call(document.getElementsByClassName('slider-container'), value => {
     value.addEventListener('mousedown', event => onMouseDown(event))
     value.addEventListener('touchstart', event => onMouseDown(event))
@@ -16,19 +14,15 @@ Array.prototype.forEach.call(document.getElementsByClassName('slider-container')
     value.addEventListener('mousemove', event => onMouseMove(event))
     value.addEventListener('touchmove', event => onMouseMove(event))
 })
-
-
 function onMouseDown(event) {
     let domRect = event.target.getBoundingClientRect()
     let clientX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX
     mouseDown = clientX - (domRect.left + event.target.clientLeft)
 }
-
 function onMouseOut(event) {
     event.target.children[0].style.left = offset[event.target.children[0].id] + 'px'
     mouseDown = false
 }
-
 function onMouseMove(event) {
     let id = event.target.children[0].id
     if (mouseDown) {
@@ -38,7 +32,6 @@ function onMouseMove(event) {
         event.target.children[0].style.left = offset[id] + leftSide - mouseDown + 'px'
     }
 }
-
 function onMouseUp(event) {
     let domRect = event.target.getBoundingClientRect()
     let id = event.target.children[0].id
