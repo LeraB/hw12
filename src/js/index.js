@@ -53,14 +53,13 @@ function onMouseUp(event) {
     mouseDown = false
 }
 function animateSlider(elem, destPos, left = false) {
-    let id = setInterval(frame, 1)
     let currentPos = parseInt(elem.style.left)
-    function frame() {
+    let id = setInterval(() => {
         if (currentPos === destPos) {
             clearInterval(id)
         } else {
             left ? currentPos-- : currentPos++
             elem.style.left = currentPos + 'px'
         }
-    }
+    }, 1)
 }
