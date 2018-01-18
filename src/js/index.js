@@ -88,9 +88,17 @@ function animateSlider(elem, destPos, left = false, currentPos) {
             clearInterval(id)
         } else {
             if (Math.abs(currentPos) >= 550 || Math.abs(currentPos) <= 50) {
-                left ? currentPos-- : currentPos++
+                if (left) {
+                    currentPos--
+                } else {
+                    currentPos++
+                }
             } else {
-                left ? currentPos -= 10 : currentPos += 10
+                if (left) {
+                    currentPos -= 10
+                } else {
+                    currentPos += 10
+                }
             }
             elem.style.left = currentPos + 'px'
         }
